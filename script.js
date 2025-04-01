@@ -31,7 +31,26 @@ const translations = {
         "2nd": "2nd",
         "3rd": "3rd",
         "4th": "4th",
-        "OT": "OT"
+        "OT": "OT",
+        "Settings": "Settings",
+        "Back": "Back",
+        "Clock Settings": "Clock Settings",
+        "Display Settings": "Display Settings",
+        "Sound Settings": "Sound Settings",
+        "Default Game Time": "Default Game Time",
+        "Default Shot Clock": "Default Shot Clock",
+        "Clock Font Size": "Clock Font Size",
+        "Show Shot Clock": "Show Shot Clock",
+        "Enable Sound Effects": "Enable Sound Effects",
+        "Volume": "Volume",
+        "Small": "Small",
+        "Medium": "Medium",
+        "Large": "Large",
+        "Always": "Always",
+        "Optional": "Optional",
+        "Never": "Never",
+        "On": "On",
+        "Off": "Off"
     },
     es: {
         "Game Clock": "Reloj de Juego",
@@ -56,7 +75,26 @@ const translations = {
         "2nd": "2Q",
         "3rd": "3Q",
         "4th": "4Q",
-        "OT": "ET"
+        "OT": "ET",
+        "Settings": "Configuración",
+        "Back": "Volver",
+        "Clock Settings": "Configuración de Relojes",
+        "Display Settings": "Configuración de Pantalla",
+        "Sound Settings": "Configuración de Sonido",
+        "Default Game Time": "Tiempo de Juego por Defecto",
+        "Default Shot Clock": "Reloj de Posesión por Defecto",
+        "Clock Font Size": "Tamaño de Fuente del Reloj",
+        "Show Shot Clock": "Mostrar Reloj de Posesión",
+        "Enable Sound Effects": "Activar Efectos de Sonido",
+        "Volume": "Volumen",
+        "Small": "Pequeño",
+        "Medium": "Mediano",
+        "Large": "Grande",
+        "Always": "Siempre",
+        "Optional": "Opcional",
+        "Never": "Nunca",
+        "On": "Activado",
+        "Off": "Desactivado"
     }
 };
 
@@ -67,7 +105,7 @@ function updateGameClockDisplay() {
 }
 
 function updateShotClockDisplay() {
-    let display = shotClockHidden ? "" : shotSeconds;
+    let display = shotClockHidden ? "---" : shotSeconds;
     document.getElementById("shotClock").innerText = display;
 }
 
@@ -213,118 +251,225 @@ function updateDarkModeButton(isDarkMode) {
     }
 }
 
-// Event Listeners
-document.addEventListener('DOMContentLoaded', () => {
-    const darkModeButton = document.getElementById("darkModeToggle");
-    const shotClock = document.getElementById("shotClock");
-    const hideShotClockButton = document.getElementById("toggleShotClockVisibility");
-    const languageButton = document.getElementById("languageToggle");
-    const gameClock = document.getElementById("gameClock");
-    
-    // Set initial dark mode
-    const isDarkMode = localStorage.getItem("dark-mode") === "enabled";
-    document.body.classList.toggle("dark-mode", isDarkMode);
-    updateDarkModeButton(isDarkMode);
-    
-    // Clock click events
-    gameClock.addEventListener("click", () => {
-        if (!document.getElementById("editClocks").classList.contains("editing")) {
-            toggleGameClock();
-        }
-    });
+function toggleDarkMode() {
+    const darkModeEnabled = document.body.classList.toggle("dark-mode");
+    localStorage.setItem("dark-mode", darkModeEnabled ? "enabled" : "disabled");
+    updateDarkModeButton(darkModeEnabled);
+}
 
-    shotClock.addEventListener("click", () => {
-        if (!document.getElementById("editClocks").classList.contains("editing")) {
-            toggleShotClock();
+function toggleLanguage() {
+    currentLang = currentLang === "en" ? "es" : "en";
+    document.querySelectorAll("[data-translate]").forEach(element => {
+        const translationKey = element.dataset.translate;
+        if (translations[currentLang][translationKey]) {
+            element.innerText = translations[currentLang][translationKey];
         }
     });
     
-    // Dark mode toggle
-    darkModeButton.addEventListener("click", () => {
-        const darkModeEnabled = document.body.classList.toggle("dark-mode");
-        localStorage.setItem("dark-mode", darkModeEnabled ? "enabled" : "disabled");
-        updateDarkModeButton(darkModeEnabled);
-    });
-
-    // Shot clock visibility toggle
-    hideShotClockButton.addEventListener("click", () => {
-        if (shotClock.style.visibility === "hidden") {
-            shotClock.style.visibility = "visible";
-            hideShotClockButton.innerText = translations[currentLang]["Hide"];
-        } else {
-            shotClock.style.visibility = "hidden";
-            hideShotClockButton.innerText = translations[currentLang]["Show"];
-        }
-    });
-
-    // Language toggle
-    languageButton.addEventListener("click", () => {
-        currentLang = currentLang === "en" ? "es" : "en";
-        document.querySelectorAll("[data-translate]").forEach(element => {
-            const translationKey = element.dataset.translate;
-            if (translations[currentLang][translationKey]) {
-                element.innerText = translations[currentLang][translationKey];
-            }
-        });
-        
-        // Translate quarter select options
-        const quarterSelect = document.getElementById("quarter");
+    // Translate quarter select options if they exist
+    const quarterSelect = document.getElementById("quarter");
+    if (quarterSelect) {
         quarterSelect.querySelectorAll("option").forEach(option => {
             const translationKey = option.dataset.translate;
             if (translations[currentLang][translationKey]) {
                 option.innerText = translations[currentLang][translationKey];
             }
         });
-        
-        // Update dynamic buttons
-        const gameClockButton = document.getElementById("toggleGameClock");
+    }
+    
+    // Update dynamic buttons if they exist
+    const gameClockButton = document.getElementById("toggleGameClock");
+    if (gameClockButton) {
         gameClockButton.innerText = gameRunning ? translations[currentLang]["Pause"] : translations[currentLang]["Start"];
-        
-        const shotClockButton = document.getElementById("toggleShotClock");
+    }
+    
+    const shotClockButton = document.getElementById("toggleShotClock");
+    if (shotClockButton) {
         shotClockButton.innerText = shotRunning ? translations[currentLang]["Pause"] : translations[currentLang]["Start"];
-        
-        const shotClockVisibilityButton = document.getElementById("toggleShotClockVisibility");
+    }
+    
+    const shotClockVisibilityButton = document.getElementById("toggleShotClockVisibility");
+    if (shotClockVisibilityButton) {
         shotClockVisibilityButton.innerText = shotClockHidden ? translations[currentLang]["Show"] : translations[currentLang]["Hide"];
-    });
+    }
+}
+
+// Event Listeners
+document.addEventListener('DOMContentLoaded', () => {
+    // Set initial dark mode
+    const isDarkMode = localStorage.getItem("dark-mode") === "enabled";
+    document.body.classList.toggle("dark-mode", isDarkMode);
+    updateDarkModeButton(isDarkMode);
+    
+    // Apply saved font size
+    const savedFontSize = localStorage.getItem('clockFontSize') || 'medium';
+    updateClockFontSize(savedFontSize);
+    
+    // Dark mode toggle
+    const darkModeButton = document.getElementById("darkModeToggle");
+    if (darkModeButton) {
+        darkModeButton.addEventListener("click", toggleDarkMode);
+    }
+    
+    // Language toggle
+    const languageButton = document.getElementById("languageToggle");
+    if (languageButton) {
+        languageButton.addEventListener("click", toggleLanguage);
+    }
+
+    // Clock click events
+    const gameClock = document.getElementById("gameClock");
+    if (gameClock) {
+        gameClock.addEventListener("click", () => {
+            if (!document.getElementById("editClocks").classList.contains("editing")) {
+                toggleGameClock();
+            }
+        });
+    }
+
+    const shotClock = document.getElementById("shotClock");
+    if (shotClock) {
+        shotClock.addEventListener("click", () => {
+            if (!document.getElementById("editClocks").classList.contains("editing")) {
+                if (shotClockHidden) {
+                    // Si está oculto, primero lo mostramos
+                    shotClockHidden = false;
+                    shotSeconds = lastShotClockValue;
+                    updateShotClockDisplay();
+                    document.getElementById("toggleShotClockVisibility").innerText = translations[currentLang]["Hide"];
+                    // Luego lo iniciamos
+                    startShotClock();
+                    document.getElementById("toggleShotClock").innerText = translations[currentLang]["Pause"];
+                } else {
+                    toggleShotClock();
+                }
+            }
+        });
+    }
+    
+    // Shot clock visibility toggle
+    const hideShotClockButton = document.getElementById("toggleShotClockVisibility");
+    if (hideShotClockButton) {
+        hideShotClockButton.addEventListener("click", () => {
+            if (shotClockHidden) {
+                shotClockHidden = false;
+                shotSeconds = lastShotClockValue;
+                updateShotClockDisplay();
+                startShotClock();
+                document.getElementById("toggleShotClock").innerText = translations[currentLang]["Pause"];
+            } else {
+                if (shotRunning) {
+                    pauseShotClock();
+                    document.getElementById("toggleShotClock").innerText = translations[currentLang]["Start"];
+                }
+                lastShotClockValue = shotSeconds;
+                shotClockHidden = true;
+                updateShotClockDisplay();
+            }
+            hideShotClockButton.innerText = shotClockHidden ? translations[currentLang]["Show"] : translations[currentLang]["Hide"];
+        });
+    }
 
     // Clock edit mode
-    document.getElementById("editClocks").addEventListener("click", () => {
-        const gameClock = document.getElementById("gameClock");
-        const shotClock = document.getElementById("shotClock");
-        const editButton = document.getElementById("editClocks");
-        
-        if (gameClock.contentEditable === "true") {
-            gameClock.contentEditable = "false";
-            shotClock.contentEditable = "false";
-            editButton.innerText = translations[currentLang]["Edit Clocks"];
-            editButton.classList.remove("editing");
-            document.getElementById("toggleGameClock").disabled = false;
-            document.getElementById("toggleShotClock").disabled = false;
-        } else {
-            gameClock.contentEditable = "true";
-            shotClock.contentEditable = "true";
-            editButton.innerText = translations[currentLang]["Save Clocks"];
-            editButton.classList.add("editing");
-            document.getElementById("toggleGameClock").disabled = true;
-            document.getElementById("toggleShotClock").disabled = true;
-        }
+    const editClocksButton = document.getElementById("editClocks");
+    if (editClocksButton) {
+        editClocksButton.addEventListener("click", () => {
+            const gameClock = document.getElementById("gameClock");
+            const shotClock = document.getElementById("shotClock");
+            
+            if (gameClock.contentEditable === "true") {
+                gameClock.contentEditable = "false";
+                shotClock.contentEditable = "false";
+                editClocksButton.innerText = translations[currentLang]["Edit Clocks"];
+                editClocksButton.classList.remove("editing");
+                document.getElementById("toggleGameClock").disabled = false;
+                document.getElementById("toggleShotClock").disabled = false;
+            } else {
+                gameClock.contentEditable = "true";
+                shotClock.contentEditable = "true";
+                editClocksButton.innerText = translations[currentLang]["Save Clocks"];
+                editClocksButton.classList.add("editing");
+                document.getElementById("toggleGameClock").disabled = true;
+                document.getElementById("toggleShotClock").disabled = true;
+            }
+        });
+    }
+
+    // Initialize settings page if we're on it
+    if (document.querySelector('.settings-container')) {
+        loadSettings();
+        setupSettingsEventListeners();
+    }
+});
+
+// Funciones para la página de configuración
+function loadSettings() {
+    // Cargar configuración de tiempo por defecto
+    const defaultGameTime = localStorage.getItem('defaultGameTime') || 10;
+    const defaultShotClock = localStorage.getItem('defaultShotClock') || 24;
+    document.getElementById('defaultGameTime').value = defaultGameTime;
+    document.getElementById('defaultShotClock').value = defaultShotClock;
+
+    // Cargar configuración de tamaño de fuente
+    const clockFontSize = localStorage.getItem('clockFontSize') || 'medium';
+    document.getElementById('clockFontSize').value = clockFontSize;
+
+    // Cargar configuración de visibilidad del shot clock
+    const showShotClock = localStorage.getItem('showShotClock') || 'always';
+    document.getElementById('showShotClock').value = showShotClock;
+
+    // Cargar configuración de sonido
+    const soundEffects = localStorage.getItem('soundEffects') || 'on';
+    const volume = localStorage.getItem('volume') || 50;
+    document.getElementById('soundEffects').value = soundEffects;
+    document.getElementById('volume').value = volume;
+}
+
+function setupSettingsEventListeners() {
+    document.getElementById('defaultGameTime').addEventListener('change', (e) => {
+        localStorage.setItem('defaultGameTime', e.target.value);
     });
 
-    // Shot clock visibility toggle
-    document.getElementById("toggleShotClockVisibility").addEventListener("click", () => {
-        if (shotClockHidden) {
-            shotClockHidden = false;
-            shotSeconds = lastShotClockValue;
-            updateShotClockDisplay();
-        } else {
-            if (shotRunning) {
-                pauseShotClock();
-                document.getElementById("toggleShotClock").innerText = translations[currentLang]["Start"];
-            }
-            lastShotClockValue = shotSeconds;
-            shotClockHidden = true;
-            updateShotClockDisplay();
-        }
-        document.getElementById("toggleShotClockVisibility").innerText = shotClockHidden ? translations[currentLang]["Show"] : translations[currentLang]["Hide"];
+    document.getElementById('defaultShotClock').addEventListener('change', (e) => {
+        localStorage.setItem('defaultShotClock', e.target.value);
     });
-}); 
+
+    document.getElementById('clockFontSize').addEventListener('change', (e) => {
+        localStorage.setItem('clockFontSize', e.target.value);
+        updateClockFontSize(e.target.value);
+    });
+
+    document.getElementById('showShotClock').addEventListener('change', (e) => {
+        localStorage.setItem('showShotClock', e.target.value);
+    });
+
+    document.getElementById('soundEffects').addEventListener('change', (e) => {
+        localStorage.setItem('soundEffects', e.target.value);
+    });
+
+    document.getElementById('volume').addEventListener('change', (e) => {
+        localStorage.setItem('volume', e.target.value);
+    });
+}
+
+function updateClockFontSize(size) {
+    const gameClock = document.getElementById('gameClock');
+    const shotClock = document.getElementById('shotClock');
+    
+    if (gameClock && shotClock) {
+        switch(size) {
+            case 'small':
+                gameClock.style.fontSize = '24px';
+                shotClock.style.fontSize = '24px';
+                break;
+            case 'medium':
+                gameClock.style.fontSize = '36px';
+                shotClock.style.fontSize = '36px';
+                break;
+            case 'large':
+                gameClock.style.fontSize = '48px';
+                shotClock.style.fontSize = '48px';
+                break;
+        }
+    }
+} 

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuraciones - Game Console</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <button id="darkModeToggle" class="dark-mode-button independent" aria-label="Toggle Dark Mode">
+        <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="white" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>
+        </svg>
+        <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="black" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+    </button>
+
+    <div class="settings-container">
+        <div class="navigation-buttons">
+            <a href="index.html" class="back-button" data-translate="Back">Back</a>
+            <button id="languageToggle" class="back-button" data-translate="Change Language">Change Language</button>
+        </div>
+
+        <h1 data-translate="Settings">Settings</h1>
+        
+        <div class="settings-section">
+            <h2 data-translate="Clock Settings">Clock Settings</h2>
+            <div class="setting-item">
+                <label data-translate="Default Game Time">Default Game Time:</label>
+                <input type="number" id="defaultGameTime" min="1" max="60" value="10">
+            </div>
+            <div class="setting-item">
+                <label data-translate="Default Shot Clock">Default Shot Clock:</label>
+                <input type="number" id="defaultShotClock" min="1" max="35" value="24">
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <h2 data-translate="Display Settings">Display Settings</h2>
+            <div class="setting-item">
+                <label data-translate="Clock Font Size">Clock Font Size:</label>
+                <select id="clockFontSize">
+                    <option value="small" data-translate="Small">Small</option>
+                    <option value="medium" data-translate="Medium" selected>Medium</option>
+                    <option value="large" data-translate="Large">Large</option>
+                </select>
+            </div>
+            <div class="setting-item">
+                <label data-translate="Show Shot Clock">Show Shot Clock:</label>
+                <select id="showShotClock">
+                    <option value="always" data-translate="Always">Always</option>
+                    <option value="optional" data-translate="Optional">Optional</option>
+                    <option value="never" data-translate="Never">Never</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <h2 data-translate="Sound Settings">Sound Settings</h2>
+            <div class="setting-item">
+                <label data-translate="Enable Sound Effects">Enable Sound Effects:</label>
+                <select id="soundEffects">
+                    <option value="on" data-translate="On">On</option>
+                    <option value="off" data-translate="Off">Off</option>
+                </select>
+            </div>
+            <div class="setting-item">
+                <label data-translate="Volume">Volume:</label>
+                <input type="range" id="volume" min="0" max="100" value="50">
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

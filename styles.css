@@ -275,16 +275,18 @@ select {
 
 /* Dark Mode Toggle Button */
 #darkModeToggle {
-    background: transparent;
-    border: none;
     position: absolute;
     top: 10px;
     right: 10px;
+    background: transparent;
+    border: none;
     width: 50px;
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
 }
 
 #darkModeToggle svg {
@@ -312,6 +314,51 @@ select {
 .dark-mode #icon-sun {
     opacity: 1;
     transform: rotate(0deg);
+}
+
+.dark-mode #darkModeToggle svg {
+    fill: var(--text-light);
+}
+
+/* Controles superiores */
+.top-controls {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.icon-button {
+    background: transparent;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s;
+    font-size: 16px;
+    color: var(--text-dark);
+}
+
+.icon-button:hover {
+    transform: scale(1.1);
+}
+
+.icon-button svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--text-dark);
+}
+
+.dark-mode .icon-button {
+    color: var(--text-light);
+}
+
+.dark-mode .icon-button svg {
+    fill: var(--text-light);
 }
 
 /* Responsive */
@@ -358,4 +405,220 @@ select {
     .reset-container button {
         width: 100%;
     }
+}
+
+.settings-button {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background: var(--primary-color);
+    color: var(--text-light);
+    border-radius: 10px;
+    transition: background 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.settings-button:hover {
+    background: var(--primary-hover);
+}
+
+/* Estilos para la página de configuración */
+.settings-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: var(--container-bg);
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--shadow-light);
+}
+
+.settings-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: var(--team-bg);
+    border-radius: 8px;
+}
+
+.settings-section h2 {
+    margin-top: 0;
+    color: var(--text-dark);
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    padding: 10px;
+    background: var(--container-bg);
+    border-radius: 5px;
+}
+
+.setting-item label {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.setting-item select,
+.setting-item input {
+    width: 150px;
+}
+
+.back-button {
+    display: inline-block;
+    margin: 20px;
+    padding: 10px 20px;
+    background: var(--primary-color);
+    color: var(--text-light);
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.back-button:hover {
+    background: var(--primary-hover);
+}
+
+.dark-mode .settings-section {
+    background: var(--team-dark-bg);
+}
+
+.dark-mode .setting-item {
+    background: #444;
+}
+
+.dark-mode .settings-section h2 {
+    color: var(--text-light);
+}
+
+/* Mejoras en el modo oscuro */
+.dark-mode {
+    background-color: var(--background-dark);
+    color: var(--text-light);
+}
+
+.dark-mode .container,
+.dark-mode .settings-container {
+    background: #333;
+    color: var(--text-light);
+    box-shadow: 0 0 10px var(--shadow-dark);
+}
+
+.dark-mode .clock {
+    background: var(--clock-dark-bg);
+}
+
+.dark-mode select, 
+.dark-mode input[type="number"], 
+.dark-mode input[type="text"],
+.dark-mode input[type="range"] {
+    background: #444;
+    color: var(--text-light);
+    border: 2px solid var(--dark-border);
+}
+
+.dark-mode .team,
+.dark-mode .settings-section {
+    background: var(--team-dark-bg);
+    color: var(--text-light);
+    box-shadow: 0 0 5px var(--shadow-dark);
+}
+
+.dark-mode .setting-item {
+    background: #444;
+}
+
+.dark-mode button:not(.reset-btn):not(.fouls-btn):hover {
+    background: var(--primary-hover);
+}
+
+.dark-mode .back-button,
+.dark-mode .settings-button {
+    background: var(--primary-color);
+    color: var(--text-light);
+}
+
+.dark-mode .back-button:hover,
+.dark-mode .settings-button:hover {
+    background: var(--primary-hover);
+}
+
+/* Estilos para el input range en modo oscuro */
+.dark-mode input[type="range"] {
+    -webkit-appearance: none;
+    background: #444;
+    height: 8px;
+    border-radius: 4px;
+}
+
+.dark-mode input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.dark-mode input[type="range"]::-webkit-slider-thumb:hover {
+    background: var(--primary-hover);
+}
+
+.navigation-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.navigation-buttons .back-button {
+    margin: 0;
+}
+
+.dark-mode-button {
+    background: transparent;
+    border: none;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: transform 0.3s;
+    margin: 0 auto 20px auto;
+}
+
+.dark-mode-button svg {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+#icon-moon {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+#icon-sun {
+    opacity: 0;
+    transform: rotate(-90deg);
+}
+
+.dark-mode #icon-moon {
+    opacity: 0;
+    transform: rotate(90deg);
+}
+
+.dark-mode #icon-sun {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+.dark-mode-button:hover {
+    transform: scale(1.1);
 } 
