@@ -327,31 +327,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const shotClock = document.getElementById("shotClock");
-    if (shotClock) {
-        shotClock.addEventListener("click", () => {
-            if (!document.getElementById("editClocks").classList.contains("editing")) {
-                if (shotClockHidden) {
-                    // Si está oculto, primero lo mostramos
-                    shotClockHidden = false;
-                    shotSeconds = lastShotClockValue;
-                    updateShotClockDisplay();
-                    document.getElementById("toggleShotClockVisibility").innerText = translations[currentLang]["Hide"];
-                    // Luego lo iniciamos
-                    startShotClock();
-                    document.getElementById("toggleShotClock").innerText = translations[currentLang]["Pause"];
-                } else {
-                    toggleShotClock();
-                }
-            }
-        });
-    }
-    
     // Shot clock visibility toggle
     const hideShotClockButton = document.getElementById("toggleShotClockVisibility");
     if (hideShotClockButton) {
         hideShotClockButton.addEventListener("click", () => {
             if (shotClockHidden) {
+                // If hidden, show it and start it
                 shotClockHidden = false;
                 shotSeconds = lastShotClockValue;
                 updateShotClockDisplay();
@@ -367,6 +348,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateShotClockDisplay();
             }
             hideShotClockButton.innerText = shotClockHidden ? translations[currentLang]["Show"] : translations[currentLang]["Hide"];
+        });
+    }
+
+    // Shot clock click handler
+    const shotClock = document.getElementById("shotClock");
+    if (shotClock) {
+        shotClock.addEventListener("click", () => {
+            if (!document.getElementById("editClocks").classList.contains("editing")) {
+                if (shotClockHidden) {
+                    // If hidden, first show it
+                    shotClockHidden = false;
+                    shotSeconds = lastShotClockValue;
+                    updateShotClockDisplay();
+                    document.getElementById("toggleShotClockVisibility").innerText = translations[currentLang]["Hide"];
+                    // Then start it
+                    startShotClock();
+                    document.getElementById("toggleShotClock").innerText = translations[currentLang]["Pause"];
+                } else {
+                    toggleShotClock();
+                }
+            }
         });
     }
 
