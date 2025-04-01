@@ -1,0 +1,361 @@
+/* Variables globales */
+:root {
+    --primary-color: #007bff;
+    --primary-hover: #0056b3;
+    --background-light: #f4f4f4;
+    --background-dark: #222;
+    --container-bg: white;
+    --text-light: white;
+    --text-dark: black;
+    --clock-bg: #333;
+    --clock-dark-bg: #555;
+    --border-color: #007bff;
+    --dark-border: #aaa;
+    --team-bg: #eee;
+    --team-dark-bg: #444;
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --shadow-dark: rgba(255, 255, 255, 0.1);
+    --reset-btn: red;
+    --fouls-btn: orange;
+    --reset-btn-hover: darkred;
+    --fouls-btn-hover: darkorange;
+    --button-bg: #007bff;
+    --font-family: 'Arial', sans-serif;
+    --default-padding: 15px;
+    --container-width: 850px;
+}
+
+/* Estilos base */
+body {
+    font-family: var(--font-family);
+    text-align: center;
+    background-color: var(--background-light);
+    margin: 0;
+    padding: var(--default-padding);
+}
+
+/* Layout */
+.container {
+    max-width: var(--container-width);
+    margin: auto;
+    padding: 20px;
+    background: var(--container-bg);
+    border-radius: 10px;
+    box-shadow: 0 0 8px var(--shadow-light);
+}
+
+.controls {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.clock-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 15px;
+    padding: 0 20px;
+}
+
+.clock-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 250px;
+    flex-grow: 1;
+}
+
+.quarter-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.scoreboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.team {
+    flex: 1;
+    min-width: 230px;
+    padding: 15px;
+    background: var(--team-bg);
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 4px var(--shadow-light);
+}
+
+.reset-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Componentes */
+button {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background: var(--primary-color);
+    color: var(--text-light);
+    border-radius: 10px;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: var(--primary-hover);
+}
+
+.reset-btn {
+    background: var(--reset-btn);
+}
+
+.reset-btn:hover {
+    background: var(--reset-btn-hover);
+}
+
+.fouls-btn {
+    background: var(--fouls-btn);
+}
+
+.fouls-btn:hover {
+    background: var(--fouls-btn-hover);
+}
+
+.button-group,
+.clock-button-group,
+.shot-clock-button-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.button-group button,
+.clock-button-group button,
+.shot-clock-button-group button {
+    min-width: 100px;
+    border-radius: 10px;
+}
+
+/* Botones de puntuación */
+.team .button-group.score-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.team .button-group.score-buttons button {
+    width: 90px;
+}
+
+/* Botones de faltas */
+.team .button-group.foul-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.team .button-group.foul-buttons button {
+    width: 90px;
+}
+
+.clock {
+    font-size: 36px;
+    font-weight: bold;
+    padding: 10px;
+    background: var(--clock-bg);
+    color: var(--text-light);
+    border-radius: 10px;
+    width: 150px;
+    text-align: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+input[type="number"], input[type="text"] {
+    width: 60px;
+    height: 30px;
+    text-align: center;
+    font-size: 18px;
+    padding: 3px;
+    border: 2px solid var(--border-color);
+    border-radius: 5px;
+    display: block;
+    margin: 15px auto;
+    transition: all 0.3s;
+    appearance: textfield;
+}
+
+input[type="number"]:focus, input[type="text"]:focus {
+    border-color: var(--primary-hover);
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="text"].team-name {
+    width: 90%;
+    height: 35px;
+    text-align: center;
+    font-size: 20px;
+    padding: 3px;
+    border: 2px solid var(--border-color);
+    border-radius: 5px;
+    font-weight: bold;
+    display: block;
+    margin: 0 auto 15px auto;
+}
+
+select {
+    padding: 8px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 10px;
+    background: var(--container-bg);
+    color: var(--text-dark);
+    border: 2px solid var(--border-color);
+}
+
+/* Dark Mode */
+.dark-mode {
+    background-color: var(--background-dark);
+    color: var(--text-light);
+}
+
+.dark-mode .container {
+    background: #333;
+    color: var(--text-light);
+}
+
+.dark-mode .clock {
+    background: var(--clock-dark-bg);
+}
+
+.dark-mode select, 
+.dark-mode input[type="number"], 
+.dark-mode input[type="text"] {
+    background: #444;
+    color: var(--text-light);
+    border: 2px solid var(--dark-border);
+}
+
+.dark-mode .team {
+    background: var(--team-dark-bg);
+    color: var(--text-light);
+    box-shadow: 0 0 5px var(--shadow-dark);
+}
+
+.dark-mode button:not(.reset-btn):not(.fouls-btn):hover {
+    background: var(--primary-hover);
+}
+
+/* Dark Mode Toggle Button */
+#darkModeToggle {
+    background: transparent;
+    border: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#darkModeToggle svg {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+#icon-moon {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+#icon-sun {
+    opacity: 0;
+    transform: rotate(-90deg);
+}
+
+.dark-mode #icon-moon {
+    opacity: 0;
+    transform: rotate(90deg);
+}
+
+.dark-mode #icon-sun {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+/* Responsive */
+@media (max-width: 599px) {
+    .container {
+        max-width: 100%;
+        padding: 8px;
+    }
+    .clock-container {
+        flex-direction: column;
+        gap: 15px;
+        padding: 0 10px;
+    }
+    .scoreboard {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .reset-container {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    .shot-clock-button-group {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 600px) {
+    .container {
+        max-width: 850px;
+    }
+    .clock-container {
+        flex-direction: row;
+        gap: 40px;
+        padding: 0 30px;
+    }
+    .scoreboard {
+        flex-direction: row;
+    }
+    .reset-container {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 70%;
+        gap: 150px;
+    }
+    .reset-container button {
+        width: 100%;
+    }
+} 

@@ -1,0 +1,48 @@
+ /*
+    Base styles for the scoreboard interface.
+    This file contains only global styles such as fonts, colors, and general layout structure.
+    Specific layout and component styles are defined in their respective CSS files.
+*/
+
+:root {
+    --primary-color: #007bff;
+    --primary-hover: #0056b3;
+    --background-light: #f4f4f4;
+    --background-dark: #222;
+    --container-bg: white;
+    --text-light: white;
+    --text-dark: black;
+    --clock-bg: #333;
+    --clock-dark-bg: #555;
+    --border-color: #007bff;
+    --dark-border: #aaa;
+    --team-bg: #eee;
+    --team-dark-bg: #444;
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --shadow-dark: rgba(255, 255, 255, 0.1);
+    --reset-btn: red;
+    --fouls-btn: orange;
+    --reset-btn-hover: darkred;
+    --fouls-btn-hover: darkorange;
+    --button-bg: #007bff;
+    --font-family: 'Arial', sans-serif;
+    --default-padding: 15px;
+    --container-width: 850px;
+}
+
+body {
+    font-family: var(--font-family);
+    text-align: center;
+    background-color: var(--background-light);
+    margin: 0;
+    padding: var(--default-padding);
+}
+
+.container {
+    max-width: var(--container-width);
+    margin: auto;
+    padding: 20px;
+    background: var(--container-bg);
+    border-radius: 10px;
+    box-shadow: 0 0 8px var(--shadow-light);
+}

@@ -1,0 +1,159 @@
+ /*
+    Layout styles for the scoreboard interface.
+    This file defines the overall page structure, flexbox/grid settings,
+    and responsive behaviors.
+*/
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+    background: var(--container-bg);
+    border-radius: 10px;
+    box-shadow: 0 0 8px var(--shadow-light);
+}
+
+.controls {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+/* Dark Mode Button - Positioned Independently */
+.dark-mode-button.independent {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--button-bg);
+    border: none;
+    padding: 10px;
+    border-radius: 10px; /* Match other buttons */
+    cursor: pointer;
+    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    box-shadow: 0 0 5px var(--shadow-light);
+}
+
+.clock-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 15px;
+    padding: 0 20px;
+}
+
+.clock-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 250px;
+    flex-grow: 1;
+}
+
+/* Shot Clock Buttons - Organized in 2x2 Grid */
+.shot-clock-button-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 4px;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.quarter-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.scoreboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.team {
+    flex: 1;
+    min-width: 230px;
+    padding: 15px;
+    background: var(--team-bg);
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 4px var(--shadow-light);
+}
+
+.reset-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px; /* Increased margin to create more separation */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.reset-container button {
+    width: 100%;
+}
+
+/* Cursor pointer for interactive elements */
+.clock, .clock button {
+    cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 599px) {
+    .container {
+        max-width: 100%;
+        padding: 8px;
+    }
+    .clock-container {
+        flex-direction: column;
+        gap: 15px;
+        padding: 0 10px;
+    }
+    .scoreboard {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .reset-container {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    .shot-clock-button-group {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 600px) {
+    .container {
+        max-width: 850px;
+    }
+    .clock-container {
+        flex-direction: row;
+        gap: 40px;
+        padding: 0 30px;
+    }
+    .scoreboard {
+        flex-direction: row;
+    }
+    .reset-container {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 70%;
+        gap: 150px;
+    }
+    .reset-container button {
+        width: 100%;
+    }
+}
