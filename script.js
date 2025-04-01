@@ -50,7 +50,8 @@ const translations = {
         "Optional": "Optional",
         "Never": "Never",
         "On": "On",
-        "Off": "Off"
+        "Off": "Off",
+        "Save": "Save"
     },
     es: {
         "Game Clock": "Reloj de Juego",
@@ -94,19 +95,26 @@ const translations = {
         "Optional": "Opcional",
         "Never": "Nunca",
         "On": "Activado",
-        "Off": "Desactivado"
+        "Off": "Desactivado",
+        "Save": "Guardar"
     }
 };
 
 // Funciones del reloj
 function updateGameClockDisplay() {
+    const gameClockElement = document.getElementById("gameClock");
+    if (gameClockElement) {
     let display = `${gameMinutes}:${gameSeconds < 10 ? '0' : ''}${gameSeconds}`;
-    document.getElementById("gameClock").innerText = display;
+        gameClockElement.innerText = display;
+    }
 }
 
 function updateShotClockDisplay() {
-    let display = shotClockHidden ? "---" : shotSeconds;
-    document.getElementById("shotClock").innerText = display;
+    const shotClockElement = document.getElementById("shotClock");
+    if (shotClockElement) {
+        let display = shotClockHidden ? "---" : shotSeconds;
+        shotClockElement.innerText = display;
+    }
 }
 
 function toggleGameClock() {
@@ -142,6 +150,9 @@ function startGameClock() {
 function pauseGameClock() {
     clearInterval(gameClockInterval);
     gameRunning = false;
+    if (gameMinutes === 0 && gameSeconds === 0) {
+        document.getElementById("toggleGameClock").innerText = translations[currentLang]["Start"];
+    }
 }
 
 function resetGameClock() {
@@ -180,6 +191,9 @@ function startShotClock() {
 function pauseShotClock() {
     clearInterval(shotClockInterval);
     shotRunning = false;
+    if (shotSeconds === 0) {
+        document.getElementById("toggleShotClock").innerText = translations[currentLang]["Start"];
+    }
 }
 
 function resetShotClock(value) {
@@ -252,22 +266,22 @@ function updateDarkModeButton(isDarkMode) {
 }
 
 function toggleDarkMode() {
-    const darkModeEnabled = document.body.classList.toggle("dark-mode");
-    localStorage.setItem("dark-mode", darkModeEnabled ? "enabled" : "disabled");
-    updateDarkModeButton(darkModeEnabled);
+        const darkModeEnabled = document.body.classList.toggle("dark-mode");
+        localStorage.setItem("dark-mode", darkModeEnabled ? "enabled" : "disabled");
+        updateDarkModeButton(darkModeEnabled);
 }
 
 function toggleLanguage() {
-    currentLang = currentLang === "en" ? "es" : "en";
-    document.querySelectorAll("[data-translate]").forEach(element => {
-        const translationKey = element.dataset.translate;
-        if (translations[currentLang][translationKey]) {
-            element.innerText = translations[currentLang][translationKey];
-        }
-    });
-    
+        currentLang = currentLang === "en" ? "es" : "en";
+        document.querySelectorAll("[data-translate]").forEach(element => {
+            const translationKey = element.dataset.translate;
+            if (translations[currentLang][translationKey]) {
+                element.innerText = translations[currentLang][translationKey];
+            }
+        });
+        
     // Translate quarter select options if they exist
-    const quarterSelect = document.getElementById("quarter");
+        const quarterSelect = document.getElementById("quarter");
     if (quarterSelect) {
         quarterSelect.querySelectorAll("option").forEach(option => {
             const translationKey = option.dataset.translate;
@@ -276,19 +290,19 @@ function toggleLanguage() {
             }
         });
     }
-    
+        
     // Update dynamic buttons if they exist
-    const gameClockButton = document.getElementById("toggleGameClock");
+        const gameClockButton = document.getElementById("toggleGameClock");
     if (gameClockButton) {
         gameClockButton.innerText = gameRunning ? translations[currentLang]["Pause"] : translations[currentLang]["Start"];
     }
-    
-    const shotClockButton = document.getElementById("toggleShotClock");
+        
+        const shotClockButton = document.getElementById("toggleShotClock");
     if (shotClockButton) {
         shotClockButton.innerText = shotRunning ? translations[currentLang]["Pause"] : translations[currentLang]["Start"];
     }
-    
-    const shotClockVisibilityButton = document.getElementById("toggleShotClockVisibility");
+        
+        const shotClockVisibilityButton = document.getElementById("toggleShotClockVisibility");
     if (shotClockVisibilityButton) {
         shotClockVisibilityButton.innerText = shotClockHidden ? translations[currentLang]["Show"] : translations[currentLang]["Hide"];
     }
@@ -318,7 +332,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Clock click events
-    const gameClock = document.getElementById("gameClock");
+        const gameClock = document.getElementById("gameClock");
     if (gameClock) {
         gameClock.addEventListener("click", () => {
             if (!document.getElementById("editClocks").classList.contains("editing")) {
@@ -331,22 +345,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const hideShotClockButton = document.getElementById("toggleShotClockVisibility");
     if (hideShotClockButton) {
         hideShotClockButton.addEventListener("click", () => {
-            if (shotClockHidden) {
+        if (shotClockHidden) {
                 // If hidden, show it and start it
-                shotClockHidden = false;
-                shotSeconds = lastShotClockValue;
-                updateShotClockDisplay();
+            shotClockHidden = false;
+            shotSeconds = lastShotClockValue;
+            updateShotClockDisplay();
                 startShotClock();
                 document.getElementById("toggleShotClock").innerText = translations[currentLang]["Pause"];
-            } else {
-                if (shotRunning) {
-                    pauseShotClock();
-                    document.getElementById("toggleShotClock").innerText = translations[currentLang]["Start"];
-                }
-                lastShotClockValue = shotSeconds;
-                shotClockHidden = true;
-                updateShotClockDisplay();
+        } else {
+            if (shotRunning) {
+                pauseShotClock();
+                document.getElementById("toggleShotClock").innerText = translations[currentLang]["Start"];
             }
+            lastShotClockValue = shotSeconds;
+            shotClockHidden = true;
+            updateShotClockDisplay();
+        }
             hideShotClockButton.innerText = shotClockHidden ? translations[currentLang]["Show"] : translations[currentLang]["Hide"];
         });
     }
@@ -376,23 +390,192 @@ document.addEventListener('DOMContentLoaded', () => {
     const editClocksButton = document.getElementById("editClocks");
     if (editClocksButton) {
         editClocksButton.addEventListener("click", () => {
-            const gameClock = document.getElementById("gameClock");
-            const shotClock = document.getElementById("shotClock");
+            const isEditing = editClocksButton.classList.contains("editing");
             
-            if (gameClock.contentEditable === "true") {
-                gameClock.contentEditable = "false";
-                shotClock.contentEditable = "false";
-                editClocksButton.innerText = translations[currentLang]["Edit Clocks"];
-                editClocksButton.classList.remove("editing");
-                document.getElementById("toggleGameClock").disabled = false;
-                document.getElementById("toggleShotClock").disabled = false;
-            } else {
-                gameClock.contentEditable = "true";
-                shotClock.contentEditable = "true";
-                editClocksButton.innerText = translations[currentLang]["Save Clocks"];
+            if (!isEditing) {
+                // Enter edit mode
                 editClocksButton.classList.add("editing");
-                document.getElementById("toggleGameClock").disabled = true;
-                document.getElementById("toggleShotClock").disabled = true;
+                editClocksButton.innerText = translations[currentLang]["Save"];
+                
+                // Pause clocks if running
+                if (gameRunning) {
+                    pauseGameClock();
+                    document.getElementById("toggleGameClock").innerText = translations[currentLang]["Start"];
+                }
+                if (shotRunning) {
+                    pauseShotClock();
+                    document.getElementById("toggleShotClock").innerText = translations[currentLang]["Start"];
+                }
+                
+                // Convert displays to inputs
+                const gameClock = document.getElementById("gameClock");
+                const shotClock = document.getElementById("shotClock");
+                
+                // Create input for game clock
+                const gameClockInput = document.createElement("input");
+                gameClockInput.type = "text";
+                gameClockInput.value = `${gameMinutes}:${gameSeconds < 10 ? '0' : ''}${gameSeconds}`;
+                gameClockInput.maxLength = 5;
+                gameClockInput.pattern = "[0-9]{1,2}:[0-9]{2}";
+                gameClockInput.title = "Format: MM:SS";
+                gameClockInput.className = "clock-input";
+                
+                // Create input for shot clock
+                const shotClockInput = document.createElement("input");
+                shotClockInput.type = "text";
+                shotClockInput.value = shotClockHidden ? "---" : shotSeconds;
+                shotClockInput.maxLength = 2;
+                shotClockInput.pattern = "[0-9]{1,2}";
+                shotClockInput.title = "Format: SS";
+                shotClockInput.className = "clock-input";
+                
+                // Replace displays with inputs
+                gameClock.parentNode.replaceChild(gameClockInput, gameClock);
+                shotClock.parentNode.replaceChild(shotClockInput, shotClock);
+                
+            } else {
+                // Save changes
+                const allClockControls = document.querySelectorAll(".clock-controls");
+                const gameClockInput = allClockControls[0].querySelector("input.clock-input");
+                const shotClockInput = allClockControls[1].querySelector("input.clock-input");
+                
+                // Store previous states
+                const wasGameRunning = gameRunning;
+                const wasShotRunning = shotRunning;
+                
+                // Debug log inputs
+                console.log("Game Clock Input:", gameClockInput ? gameClockInput.value : "No encontrado");
+                console.log("Shot Clock Input:", shotClockInput ? shotClockInput.value : "No encontrado");
+                
+                // Validate and update game clock
+                if (gameClockInput && validateGameClockInput(gameClockInput.value)) {
+                    const [minutes, seconds] = gameClockInput.value.split(":").map(Number);
+                    gameMinutes = minutes;
+                    gameSeconds = seconds;
+                }
+                
+                // Validate and update shot clock
+                if (shotClockInput && validateShotClockInput(shotClockInput.value)) {
+                    if (shotClockInput.value !== "---") {
+                        shotSeconds = parseInt(shotClockInput.value);
+                        console.log("Shot clock value updated to:", shotSeconds);
+                    }
+                }
+                
+                // Exit edit mode
+                editClocksButton.classList.remove("editing");
+                editClocksButton.innerText = translations[currentLang]["Edit Clocks"];
+                
+                if (allClockControls && allClockControls.length >= 2) {
+                    // Recreate game clock element
+                    const gameClockElement = document.createElement("div");
+                    gameClockElement.id = "gameClock";
+                    gameClockElement.className = "clock";
+                    gameClockElement.innerText = `${gameMinutes}:${gameSeconds < 10 ? '0' : ''}${gameSeconds}`;
+                    
+                    // Recreate shot clock element
+                    const shotClockElement = document.createElement("div");
+                    shotClockElement.id = "shotClock";
+                    shotClockElement.className = "clock";
+                    shotClockElement.innerText = shotClockHidden ? "---" : shotSeconds;
+                    
+                    // Apply font size from settings
+                    const fontSize = localStorage.getItem('clockFontSize') || 'medium';
+                    switch(fontSize) {
+                        case 'small':
+                            gameClockElement.style.fontSize = '24px';
+                            shotClockElement.style.fontSize = '24px';
+                            break;
+                        case 'large':
+                            gameClockElement.style.fontSize = '48px';
+                            shotClockElement.style.fontSize = '48px';
+                            break;
+                        default:
+                            gameClockElement.style.fontSize = '36px';
+                            shotClockElement.style.fontSize = '36px';
+                    }
+                    
+                    // Clean and replace game clock
+                    const gameClockContainer = allClockControls[0];
+                    const oldGameClock = gameClockContainer.querySelector("#gameClock");
+                    if (oldGameClock) {
+                        oldGameClock.remove();
+                    }
+                    const gameClockInputToReplace = gameClockContainer.querySelector("input.clock-input");
+                    if (gameClockInputToReplace) {
+                        gameClockInputToReplace.parentNode.replaceChild(gameClockElement, gameClockInputToReplace);
+                    } else {
+                        gameClockContainer.querySelector("p").insertAdjacentElement('afterend', gameClockElement);
+                    }
+                    
+                    // Clean and replace shot clock
+                    const shotClockContainer = allClockControls[1];
+                    const oldShotClock = shotClockContainer.querySelector("#shotClock");
+                    if (oldShotClock) {
+                        oldShotClock.remove();
+                    }
+                    const shotClockInputToReplace = shotClockContainer.querySelector("input.clock-input");
+                    if (shotClockInputToReplace) {
+                        shotClockInputToReplace.parentNode.replaceChild(shotClockElement, shotClockInputToReplace);
+                    } else {
+                        shotClockContainer.querySelector("p").insertAdjacentElement('afterend', shotClockElement);
+                    }
+                    
+                    // Reattach click events
+                    gameClockElement.addEventListener("click", () => {
+                        if (!editClocksButton.classList.contains("editing")) {
+                            toggleGameClock();
+                        }
+                    });
+                    
+                    shotClockElement.addEventListener("click", () => {
+                        if (!editClocksButton.classList.contains("editing")) {
+                            if (shotClockHidden) {
+                                shotClockHidden = false;
+                                shotSeconds = lastShotClockValue;
+                                updateShotClockDisplay();
+                                const shotClockVisibilityButton = document.getElementById("toggleShotClockVisibility");
+                                if (shotClockVisibilityButton) {
+                                    shotClockVisibilityButton.innerText = translations[currentLang]["Hide"];
+                                }
+                                startShotClock();
+                                const shotClockButton = document.getElementById("toggleShotClock");
+                                if (shotClockButton) {
+                                    shotClockButton.innerText = translations[currentLang]["Pause"];
+                                }
+                            } else {
+                                toggleShotClock();
+                            }
+                        }
+                    });
+                    
+                    // Restore clock states and button texts
+                    if (wasGameRunning) {
+                        startGameClock();
+                        const gameClockButton = document.getElementById("toggleGameClock");
+                        if (gameClockButton) {
+                            gameClockButton.innerText = translations[currentLang]["Pause"];
+                        }
+                    } else {
+                        const gameClockButton = document.getElementById("toggleGameClock");
+                        if (gameClockButton) {
+                            gameClockButton.innerText = translations[currentLang]["Start"];
+                        }
+                    }
+                    
+                    if (wasShotRunning) {
+                        startShotClock();
+                        const shotClockButton = document.getElementById("toggleShotClock");
+                        if (shotClockButton) {
+                            shotClockButton.innerText = translations[currentLang]["Pause"];
+                        }
+                    } else {
+                        const shotClockButton = document.getElementById("toggleShotClock");
+                        if (shotClockButton) {
+                            shotClockButton.innerText = translations[currentLang]["Start"];
+                        }
+                    }
+                }
             }
         });
     }
@@ -474,4 +657,24 @@ function updateClockFontSize(size) {
                 break;
         }
     }
+}
+
+// Input validation functions
+function validateGameClockInput(input) {
+    if (!input || typeof input !== 'string') return false;
+    const pattern = /^[0-9]{1,2}:[0-9]{2}$/;
+    if (!pattern.test(input)) return false;
+    
+    const [minutes, seconds] = input.split(":").map(Number);
+    return !isNaN(minutes) && !isNaN(seconds) && minutes >= 0 && minutes <= 60 && seconds >= 0 && seconds < 60;
+}
+
+function validateShotClockInput(input) {
+    if (!input || typeof input !== 'string') return false;
+    if (input === "---") return true;
+    const pattern = /^[0-9]{1,2}$/;
+    if (!pattern.test(input)) return false;
+    
+    const seconds = parseInt(input);
+    return !isNaN(seconds) && seconds >= 0 && seconds <= 35;
 } 
