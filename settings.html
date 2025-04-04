@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Configuraciones - Game Console</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=1.0.0">
 </head>
 <body>
     <button id="darkModeToggle" class="dark-mode-button independent" aria-label="Toggle Dark Mode">
@@ -27,7 +27,7 @@
     <div class="settings-container">
         <div class="navigation-buttons">
             <a href="index.html" class="back-button" data-translate="Back">Back</a>
-            <button id="languageToggle" class="back-button" data-translate="Change Language">Change Language</button>
+            <button id="languageToggle" onclick="toggleLanguage()" data-translate="Change Language">Change Language</button>
         </div>
 
         <h1 data-translate="Settings">Settings</h1>
@@ -35,11 +35,11 @@
         <div class="settings-section">
             <h2 data-translate="Clock Settings">Clock Settings</h2>
             <div class="setting-item">
-                <label data-translate="Default Game Time">Default Game Time:</label>
+                <label for="defaultGameTime" data-translate="Default Game Time">Default Game Time (minutes):</label>
                 <input type="number" id="defaultGameTime" min="1" max="60" value="10">
             </div>
             <div class="setting-item">
-                <label data-translate="Default Shot Clock">Default Shot Clock:</label>
+                <label for="defaultShotClock" data-translate="Default Shot Clock">Default Shot Clock (seconds):</label>
                 <input type="number" id="defaultShotClock" min="1" max="35" value="24">
             </div>
         </div>
@@ -47,7 +47,7 @@
         <div class="settings-section">
             <h2 data-translate="Display Settings">Display Settings</h2>
             <div class="setting-item">
-                <label data-translate="Clock Font Size">Clock Font Size:</label>
+                <label for="clockFontSize" data-translate="Clock Font Size">Clock Font Size:</label>
                 <select id="clockFontSize">
                     <option value="small" data-translate="Small">Small</option>
                     <option value="medium" data-translate="Medium" selected>Medium</option>
@@ -55,7 +55,7 @@
                 </select>
             </div>
             <div class="setting-item">
-                <label data-translate="Show Shot Clock">Show Shot Clock:</label>
+                <label for="showShotClock" data-translate="Show Shot Clock">Show Shot Clock:</label>
                 <select id="showShotClock">
                     <option value="always" data-translate="Always">Always</option>
                     <option value="optional" data-translate="Optional">Optional</option>
@@ -67,19 +67,47 @@
         <div class="settings-section">
             <h2 data-translate="Sound Settings">Sound Settings</h2>
             <div class="setting-item">
-                <label data-translate="Enable Sound Effects">Enable Sound Effects:</label>
+                <label for="soundEffects" data-translate="Enable Sound Effects">Enable Sound Effects:</label>
                 <select id="soundEffects">
                     <option value="on" data-translate="On">On</option>
                     <option value="off" data-translate="Off">Off</option>
                 </select>
             </div>
             <div class="setting-item">
-                <label data-translate="Volume">Volume:</label>
+                <label for="volume" data-translate="Volume">Volume:</label>
                 <input type="range" id="volume" min="0" max="100" value="50">
             </div>
         </div>
+
+        <div class="settings-section">
+            <h2 data-translate="Hotkeys">Hotkeys</h2>
+            <div class="setting-item">
+                <label for="clockHotkey" data-translate="Clock Hotkey">Clock Hotkey:</label>
+                <input type="text" id="clockHotkey" maxlength="1" value="K">
+            </div>
+            <div class="setting-item">
+                <label for="shotClockStartHotkey" data-translate="Shot Clock Start Hotkey">Shot Clock Start Hotkey:</label>
+                <input type="text" id="shotClockStartHotkey" maxlength="1" value="S">
+            </div>
+            <div class="setting-item">
+                <label for="shotClockReset24Hotkey" data-translate="Shot Clock Reset 24 Hotkey">Shot Clock Reset 24 Hotkey:</label>
+                <input type="text" id="shotClockReset24Hotkey" maxlength="1" value="Z">
+            </div>
+            <div class="setting-item">
+                <label for="shotClockReset14Hotkey" data-translate="Shot Clock Reset 14 Hotkey">Shot Clock Reset 14 Hotkey:</label>
+                <input type="text" id="shotClockReset14Hotkey" maxlength="1" value="X">
+            </div>
+            <div class="setting-item">
+                <label for="shotClockShowHotkey" data-translate="Shot Clock Show Hotkey">Shot Clock Show Hotkey:</label>
+                <input type="text" id="shotClockShowHotkey" maxlength="1" value="W">
+            </div>
+        </div>
+
+        <div class="settings-buttons">
+            <button id="saveSettings" onclick="saveSettings()" data-translate="Save">Save</button>
+        </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=1.0.0"></script>
 </body>
 </html> 

@@ -3,54 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Console</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="KronoGX Scoreboard - Professional console for basketball game control, scoring and fouls. Includes game clock, 24-second shot clock and electronic scoreboard.">
+    <meta name="keywords" content="basketball console, basketball scoreboard, shot clock, 24 second clock, electronic scoreboard basketball, game time control, sports scoreboard, kronogx scoreboard">
+    <meta property="og:title" content="KronoGX Scoreboard - Professional Basketball Console">
+    <meta property="og:description" content="Control game time, scoring and fouls in your basketball matches with our professional console. Includes game clock, shot clock and electronic scoreboard.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://score.kronogx.com/">
+    <meta property="og:image" content="https://score.kronogx.com/og-image.jpg">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/images/favicon/site.webmanifest">
+    <link rel="mask-icon" href="assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <title>KronoGX Scoreboard - Professional Basketball Console</title>
+    <link rel="stylesheet" href="styles.css?v=1.0.0">
 </head>
 <body>
     <div class="container">
         <div class="controls">
-        <button id="darkModeToggle" class="dark-mode-button independent" aria-label="Toggle Dark Mode">
-            <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="white" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>
-            </svg>
-            <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="black" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="5"/>
-                <line x1="12" y1="1" x2="12" y2="3"/>
-                <line x1="12" y1="21" x2="12" y2="23"/>
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-                <line x1="1" y1="12" x2="3" y2="12"/>
-                <line x1="21" y1="12" x2="23" y2="12"/>
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-            </svg>
-        </button>
-                        <button id="languageToggle" data-translate="Change Language">Change Language</button>
+            <button id="darkModeToggle" class="dark-mode-button independent" aria-label="Toggle Dark Mode">
+                <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="white" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>
+                </svg>
+                <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="black" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3"/>
+                    <line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/>
+                    <line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+            </button>
+            <button id="languageToggle" data-translate="Change Language">Change Language</button>
             <button id="editClocks" data-translate="Edit Clocks">Edit Clocks</button>
             <a href="settings.html" class="settings-button" data-translate="Settings">Settings</a>
         </div>
         <div class="clock-container">
             <div class="clock-controls">
-                <p data-translate="Game Clock">Game Clock:</p>
+                <p data-translate="Game Clock">Game Clock</p>
                 <div class="clock" id="gameClock">10:00</div>
                 <div class="clock-button-group">
-                    <button id="toggleGameClock" onclick="toggleGameClock()" data-translate="Start">Start</button>
+                    <button id="toggleGameClock" onclick="toggleGameClock()" data-translate="Start">Start (K)</button>
                     <button onclick="resetGameClock()" data-translate="Reset">Reset</button>
                 </div>
             </div>
             <div class="clock-controls">
-                <p data-translate="Shot Clock">Shot Clock:</p>
+                <p data-translate="Shot Clock">Shot Clock</p>
                 <div class="clock" id="shotClock">24</div>
                 <div class="shot-clock-button-group">
-                    <button id="toggleShotClock" onclick="toggleShotClock()" data-translate="Start">Start</button>
-                    <button id="toggleShotClockVisibility" data-translate="Hide">Hide</button>
-                    <button onclick="resetShotClock(24)" data-translate="Reset 24">Reset 24</button>
-                    <button onclick="resetShotClock(14)" data-translate="Reset 14">Reset 14</button>
+                    <button id="toggleShotClock" onclick="toggleShotClock()" data-translate="Start">Start (S)</button>
+                    <button id="toggleShotClockVisibility" data-translate="Hide">Hide (W)</button>
+                    <button onclick="resetShotClock(24)" data-translate="Reset 24">Reset 24 (Z)</button>
+                    <button onclick="resetShotClock(14)" data-translate="Reset 14">Reset 14 (X)</button>
                 </div>
             </div>
         </div>
         <div class="quarter-container">
-            <p data-translate="Quarter">Quarter:</p>
+            <p data-translate="Quarter">Quarter</p>
             <select id="quarter">
                 <option value="1" data-translate="1st">1st</option>
                 <option value="2" data-translate="2nd">2nd</option>
@@ -61,9 +75,9 @@
         </div>
         <div class="scoreboard">
             <div class="team" id="teamA-container">
-                <label for="teamA" data-translate="Home">Home:</label>
+                <label for="teamA" data-translate="Home">Home</label>
                 <input id="teamA" type="text" class="team-name" value="Team A" />
-                <p data-translate="Score">Score:</p>
+                <p data-translate="Score">Score</p>
                 <input id="scoreA" type="number" value="0" min="0" />
                 <div class="button-group score-buttons">
                     <button class="score-button" onclick="addPoints('A', 1)" data-translate="+1">+1</button>
@@ -71,7 +85,7 @@
                     <button class="score-button" onclick="addPoints('A', 3)" data-translate="+3">+3</button>
                     <button class="score-button" onclick="subtractPoints('A')" data-translate="-1">-1</button>
                 </div>
-                <p data-translate="Fouls">Fouls:</p>
+                <p data-translate="Fouls">Fouls</p>
                 <input id="foulsA" type="number" value="0" min="0" max="5" />
                 <div class="button-group foul-buttons">
                     <button onclick="addFoul('A')" data-translate="+1">+1</button>
@@ -79,9 +93,9 @@
                 </div>
             </div>
             <div class="team" id="teamB-container">
-                <label for="teamB" data-translate="Away">Away:</label>
+                <label for="teamB" data-translate="Away">Away</label>
                 <input id="teamB" type="text" class="team-name" value="Team B" />
-                <p data-translate="Score">Score:</p>
+                <p data-translate="Score">Score</p>
                 <input id="scoreB" type="number" value="0" min="0" />
                 <div class="button-group score-buttons">
                     <button onclick="addPoints('B', 1)" data-translate="+1">+1</button>
@@ -89,7 +103,7 @@
                     <button onclick="addPoints('B', 3)" data-translate="+3">+3</button>
                     <button onclick="subtractPoints('B')" data-translate="-1">-1</button>
                 </div>
-                <p data-translate="Fouls">Fouls:</p>
+                <p data-translate="Fouls">Fouls</p>
                 <input id="foulsB" type="number" value="0" min="0" max="5" />
                 <div class="button-group foul-buttons">
                     <button onclick="addFoul('B')" data-translate="+1">+1</button>
@@ -102,6 +116,6 @@
             <button onclick="resetScoreboard()" class="reset-btn" data-translate="Reset Scoreboard">Reset Scoreboard</button>
         </div>
     </div>
-    <script src="script.js"></script>
+    <script src="script.js?v=1.0.0"></script>
 </body>
 </html>
