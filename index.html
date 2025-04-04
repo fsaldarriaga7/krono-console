@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Basic meta tags for character encoding and viewport -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="KronoGX Scoreboard - Professional console for basketball game control, scoring and fouls. Includes game clock, 24-second shot clock and electronic scoreboard.">
-    <meta name="keywords" content="basketball console, basketball scoreboard, shot clock, 24 second clock, electronic scoreboard basketball, game time control, sports scoreboard, kronogx scoreboard">
+    
+    <!-- SEO meta tags -->
+    <meta name="description" content="KronoGX Scoreboard - Professional basketball scoreboard console with game clock, shot clock and electronic scoreboard.">
+    <meta name="keywords" content="KronoGX, basketball console, scoreboard, shot clock, game time control">
+    
+    <!-- Open Graph meta tags for social media sharing -->
     <meta property="og:title" content="KronoGX Scoreboard - Professional Basketball Console">
-    <meta property="og:description" content="Control game time, scoring and fouls in your basketball matches with our professional console. Includes game clock, shot clock and electronic scoreboard.">
+    <meta property="og:description" content="Professional basketball scoreboard console for game control by KronoGX.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://score.kronogx.com/">
     <meta property="og:image" content="https://score.kronogx.com/og-image.jpg">
+    
+    <!-- Favicon and app icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png">
@@ -17,12 +24,16 @@
     <link rel="mask-icon" href="assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
+    
     <title>KronoGX Scoreboard - Professional Basketball Console</title>
     <link rel="stylesheet" href="styles.css?v=1.0.0">
 </head>
 <body>
+    <!-- Main container for all scoreboard elements -->
     <div class="container">
+        <!-- Top control buttons -->
         <div class="controls">
+            <!-- Dark mode toggle button with SVG icons -->
             <button id="darkModeToggle" class="dark-mode-button independent" aria-label="Toggle Dark Mode">
                 <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="white" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>
@@ -39,11 +50,15 @@
                     <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
                 </svg>
             </button>
+            <!-- Language toggle and edit buttons -->
             <button id="languageToggle" data-translate="Change Language">Change Language</button>
             <button id="editClocks" data-translate="Edit Clocks">Edit Clocks</button>
             <a href="settings.html" class="settings-button" data-translate="Settings">Settings</a>
         </div>
+
+        <!-- Clock controls section -->
         <div class="clock-container">
+            <!-- Game clock controls -->
             <div class="clock-controls">
                 <p data-translate="Game Clock">Game Clock</p>
                 <div class="clock" id="gameClock">10:00</div>
@@ -52,6 +67,7 @@
                     <button onclick="resetGameClock()" data-translate="Reset">Reset</button>
                 </div>
             </div>
+            <!-- Shot clock controls -->
             <div class="clock-controls">
                 <p data-translate="Shot Clock">Shot Clock</p>
                 <div class="clock" id="shotClock">24</div>
@@ -63,6 +79,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- Quarter selector -->
         <div class="quarter-container">
             <p data-translate="Quarter">Quarter</p>
             <select id="quarter">
@@ -73,7 +91,10 @@
                 <option value="OT" data-translate="OT">OT</option>
             </select>
         </div>
+
+        <!-- Scoreboard section -->
         <div class="scoreboard">
+            <!-- Team A (Home) section -->
             <div class="team" id="teamA-container">
                 <label for="teamA" data-translate="Home">Home</label>
                 <input id="teamA" type="text" class="team-name" value="Team A" />
@@ -92,6 +113,8 @@
                     <button onclick="subtractFoul('A')" data-translate="-1">-1</button>
                 </div>
             </div>
+
+            <!-- Team B (Away) section -->
             <div class="team" id="teamB-container">
                 <label for="teamB" data-translate="Away">Away</label>
                 <input id="teamB" type="text" class="team-name" value="Team B" />
@@ -111,6 +134,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- Reset buttons section -->
         <div class="reset-container">
             <button onclick="resetFouls()" class="fouls-btn" data-translate="Reset Fouls">Reset Fouls</button>
             <button onclick="resetScoreboard()" class="reset-btn" data-translate="Reset Scoreboard">Reset Scoreboard</button>

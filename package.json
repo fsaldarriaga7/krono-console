@@ -1,0 +1,32 @@
+{
+  "name": "kronogx-scoreboard",
+  "version": "1.0.0",
+  "description": "A professional basketball console for game control, scoring, and foul tracking",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server -c-1",
+    "lint": "eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/kronogx-scoreboard.git"
+  },
+  "keywords": [
+    "basketball",
+    "scoreboard",
+    "game-clock",
+    "shot-clock",
+    "sports"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yourusername/kronogx-scoreboard/issues"
+  },
+  "homepage": "https://github.com/yourusername/kronogx-scoreboard#readme",
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "http-server": "^14.1.1"
+  }
+} 

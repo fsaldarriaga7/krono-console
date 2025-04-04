@@ -1,5 +1,6 @@
-/* Variables globales */
+/* Global CSS Variables */
 :root {
+    /* Color scheme */
     --primary-color: #007bff;
     --primary-hover: #0056b3;
     --background-light: #f4f4f4;
@@ -20,12 +21,14 @@
     --reset-btn-hover: darkred;
     --fouls-btn-hover: darkorange;
     --button-bg: #007bff;
+    
+    /* Typography and layout */
     --font-family: 'Arial', sans-serif;
     --default-padding: 15px;
     --container-width: 850px;
 }
 
-/* Estilos base */
+/* Base styles */
 body {
     font-family: var(--font-family);
     text-align: center;
@@ -34,7 +37,7 @@ body {
     padding: var(--default-padding);
 }
 
-/* Layout */
+/* Layout styles */
 .container {
     max-width: var(--container-width);
     margin: auto;
@@ -44,6 +47,7 @@ body {
     box-shadow: 0 0 8px var(--shadow-light);
 }
 
+/* Control buttons container */
 .controls {
     position: relative;
     display: flex;
@@ -53,6 +57,7 @@ body {
     margin-bottom: 10px;
 }
 
+/* Clock container layout */
 .clock-container {
     display: flex;
     flex-wrap: wrap;
@@ -62,6 +67,7 @@ body {
     padding: 0 20px;
 }
 
+/* Individual clock control section */
 .clock-controls {
     display: flex;
     flex-direction: column;
@@ -70,6 +76,7 @@ body {
     flex-grow: 1;
 }
 
+/* Quarter selector container */
 .quarter-container {
     display: flex;
     align-items: center;
@@ -78,6 +85,7 @@ body {
     margin-bottom: 10px;
 }
 
+/* Scoreboard layout */
 .scoreboard {
     display: flex;
     flex-wrap: wrap;
@@ -85,6 +93,7 @@ body {
     gap: 20px;
 }
 
+/* Team section styling */
 .team {
     flex: 1;
     min-width: 230px;
@@ -95,6 +104,7 @@ body {
     box-shadow: 0 0 4px var(--shadow-light);
 }
 
+/* Reset buttons container */
 .reset-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -105,7 +115,7 @@ body {
     margin-right: auto;
 }
 
-/* Componentes */
+/* Button styles */
 button {
     padding: 10px;
     font-size: 16px;
@@ -121,6 +131,7 @@ button:hover {
     background: var(--primary-hover);
 }
 
+/* Reset button specific styles */
 .reset-btn {
     background: var(--reset-btn);
 }
@@ -129,6 +140,7 @@ button:hover {
     background: var(--reset-btn-hover);
 }
 
+/* Fouls button specific styles */
 .fouls-btn {
     background: var(--fouls-btn);
 }
@@ -137,6 +149,7 @@ button:hover {
     background: var(--fouls-btn-hover);
 }
 
+/* Button group layouts */
 .button-group,
 .clock-button-group,
 .shot-clock-button-group {
@@ -154,7 +167,7 @@ button:hover {
     border-radius: 10px;
 }
 
-/* Botones de puntuación */
+/* Score buttons specific styles */
 .team .button-group.score-buttons {
     display: flex;
     justify-content: center;
@@ -167,7 +180,7 @@ button:hover {
     width: 90px;
 }
 
-/* Botones de faltas */
+/* Foul buttons specific styles */
 .team .button-group.foul-buttons {
     display: flex;
     justify-content: center;
@@ -180,6 +193,7 @@ button:hover {
     width: 90px;
 }
 
+/* Clock display styles */
 .clock {
     font-size: 36px;
     font-weight: bold;
@@ -193,6 +207,7 @@ button:hover {
     cursor: pointer;
 }
 
+/* Input field styles */
 input[type="number"], input[type="text"] {
     width: 60px;
     height: 30px;
@@ -211,12 +226,14 @@ input[type="number"]:focus, input[type="text"]:focus {
     border-color: var(--primary-hover);
 }
 
+/* Remove number input spinners */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
+/* Team name input specific styles */
 input[type="text"].team-name {
     width: 90%;
     height: 35px;
@@ -230,6 +247,7 @@ input[type="text"].team-name {
     margin: 0 auto 15px auto;
 }
 
+/* Select dropdown styles */
 select {
     padding: 8px;
     font-size: 16px;
@@ -240,7 +258,7 @@ select {
     border: 2px solid var(--border-color);
 }
 
-/* Dark Mode */
+/* Dark mode styles */
 .dark-mode {
     background-color: var(--background-dark);
     color: var(--text-light);
